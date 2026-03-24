@@ -15,12 +15,21 @@
     "pluginParameters": {
       "EVM_PRIVATE_KEY": {
         "type": "string",
-        "description": "EVM private key for signing x402 payments to the Spraay gateway"
+        "required": true,
+        "description": "EVM private key for signing x402 USDC micropayments on Base. The wallet must hold USDC on Base (0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913). Each action call costs $0.001-$0.05 in USDC depending on the endpoint."
       },
       "SPRAAY_GATEWAY_URL": {
         "type": "string",
-        "description": "Spraay gateway URL (default: https://gateway.spraay.app)"
+        "required": false,
+        "description": "Spraay gateway URL (default: https://gateway.spraay.app). No API key needed — authentication and payment are handled via x402 USDC micropayments per request."
       }
+    },
+    "paymentModel": {
+      "protocol": "x402",
+      "token": "USDC",
+      "chain": "Base",
+      "costRange": "$0.001 - $0.05 per action call",
+      "note": "Each plugin action triggers a USDC micropayment on Base via the x402 protocol. Ensure the configured wallet has sufficient USDC balance before use."
     }
   },
   "keywords": [
